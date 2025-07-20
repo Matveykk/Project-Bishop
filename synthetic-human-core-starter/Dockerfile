@@ -2,7 +2,7 @@ FROM openjdk:17-jdk-slim
 
 WORKDIR /app
 
-COPY target/synthetic-human-core-starter-1.0-SNAPSHOT.jar app.jar
+COPY target/synthetic-human-core-starter-3.4.4.jar app.jar
 
 EXPOSE 8080
 
