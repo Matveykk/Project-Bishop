@@ -9,6 +9,8 @@ import com.weyland.model.CommandRequest;
 import com.weyland.model.Priority;
 import org.springframework.stereotype.Service;
 
+import java.util.concurrent.CompletableFuture;
+
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -23,7 +25,7 @@ public class CommandService {
         validate(commandRequest);
 
         if(commandRequest.getPriority() == Priority.CRITICAL) {
-            executor.execute(commandRequest);
+            CompletableFuture.runAsync(() -> executor.execute(commandRequest));
         } else {
             queue.submit(commandRequest);
         }

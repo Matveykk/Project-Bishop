@@ -1,6 +1,5 @@
 package com.weyland.audit.aspect;
 
-import com.weyland.audit.annotation.WeylandWatchingYou;
 import com.weyland.audit.service.AuditService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,17 +20,9 @@ public class AuditAspect {
     public Object auditMethod(ProceedingJoinPoint joinPoint) throws Throwable {
         String methodName = joinPoint.getSignature().toShortString();
         Object[] args = joinPoint.getArgs();
-        Object result = null;
-        Throwable error = null;
 
-        try {
-            result = joinPoint.proceed();
-            return result;
-        } catch (Throwable t) {
-            error = t;
-            throw t;
-        } finally {
-            auditService.audit(methodName, args, error);
-        }
+        auditService.audit(methodName, args, null);
+
+        return joinPoint.proceed();
     }
 }
