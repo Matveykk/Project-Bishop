@@ -3,7 +3,7 @@ docker compose up -d --build
 
 Затем нужно запустить приложение в bishopprototype
 
-пример запроса
+пример запроса POST
 http://localhost:8080/api/command
 
 json raw body
